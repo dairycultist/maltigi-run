@@ -1,4 +1,7 @@
-[gd_scene load_steps=3 format=3 uid="uid://cssjgrljslw3b"]
+[gd_scene load_steps=5 format=3 uid="uid://cssjgrljslw3b"]
+
+[ext_resource type="PackedScene" uid="uid://bdgc2c6bsecht" path="res://thick_roblox.fbx" id="1_ckofj"]
+[ext_resource type="Script" uid="uid://0iopt73be7sv" path="res://boobcoin_animator.gd" id="2_0xr8s"]
 
 [sub_resource type="BoxMesh" id="BoxMesh_f3sb7"]
 size = Vector3(3, 0.5, 3)
@@ -15,3 +18,10 @@ mesh = SubResource("BoxMesh_f3sb7")
 [node name="CollisionShape3D" type="CollisionShape3D" parent="."]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -0.25, 0)
 shape = SubResource("BoxShape3D_fj7yv")
+
+[node name="Boobcoin" type="Node3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.5, 0)
+
+[node name="Dunny But Rule34" parent="Boobcoin" instance=ExtResource("1_ckofj")]
+transform = Transform3D(0.2, 0, 0, 0, 0.2, 0, 0, 0, 0.2, 0, 0, 0)
+script = ExtResource("2_0xr8s")

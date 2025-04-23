@@ -30,7 +30,7 @@ func _process(delta: float) -> void:
 	if (velocity.y > -max_fall_speed):
 		velocity += get_gravity() * 2.5 * delta
 	
-	if Input.is_action_just_pressed("ui_accept") and is_on_floor():
+	if Input.is_action_pressed("ui_accept") and is_on_floor():
 		velocity.y = jump_speed
 	
 	if direction:
@@ -44,7 +44,13 @@ func _process(delta: float) -> void:
 	
 	if is_on_floor():
 		velocity = lerp(velocity, Vector3.ZERO, delta * drag)
-		
+	else:
+		# make planar velocity forward only
+		var forward = -get_global_transform().basis.z
+		var planar = Vector3(forward.x, 0, forward.z) * Vector2(velocity.x, velocity.z).length()
+		velocity.x = planar.x
+		velocity.z = planar.z
+	
 	move_and_slide()
 
 

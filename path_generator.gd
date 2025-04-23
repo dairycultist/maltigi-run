@@ -2,8 +2,14 @@ extends Node3D
 
 const PATH := preload("res://path.tscn")
 
+# boobcoin collecting
+# enemy chasing you
+# transportation to shop upon getting all boobcoin
+# items/modifiers
+# more enemies, randomly selected from (ex. one that makes all platforms icey)
+
 const PATH_SIZE := 3
-const MAZE_SIZE := 30
+const MAZE_SIZE := 15
 
 func _ready() -> void:
 	
