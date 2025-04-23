@@ -9,7 +9,7 @@ extends CharacterBody3D
 @export var drag := 8
 @export var grounded_accel := 50
 @export var airborne_accel := 10
-@export var jump_speed := 7
+@export var jump_speed := 8
 @export var max_fall_speed := 32
 
 var camera_pitch := 0.0
