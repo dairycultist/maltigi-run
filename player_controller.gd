@@ -1,12 +1,10 @@
 extends CharacterBody3D
 
 # what if battle royale https://www.youtube.com/watch?v=LG2eXmozbH8
-# each hexagon has a cutout for a ladder (goes all the way down to water!)
-# hexagons are made of concrete. ladder is probably a nice bright orange.
-# maybe cutout is a bit wider than ladder, so up top there's a grate to either
-# side to make it look nice
 # need a separate mesh for collision
 # fast paced gameplay
+
+# splash particle effect when landing in water
 
 @export_group("Misc")
 @export var camera : Camera3D
@@ -14,12 +12,13 @@ extends CharacterBody3D
 @export_group("Movement")
 @export var mouse_sensitivity := 0.3
 
-@export var drag := 8
-@export var grounded_accel := 50
+@export var drag := 15
+@export var grounded_accel := 170
 @export var airborne_accel := 10
 @export var flying_accel := 200
 @export var jump_speed := 8
 @export var max_fall_speed := 32
+@export var airborne_course_correction := 0.2
 
 var camera_pitch := 0.0
 
@@ -75,14 +74,17 @@ func _process(delta: float) -> void:
 		if is_on_floor():
 			velocity = lerp(velocity, Vector3.ZERO, delta * drag)
 		else:
+			
 			# make planar velocity slerp towards forward
-			# IF we are already going forwards
+			# assuming we're already moving forwards quickly
 			var forward := -get_global_transform().basis.z
-			var speed := Vector2(velocity.x, velocity.z).length()
-			var forward_speed = max(0, Vector3(velocity.x, 0, velocity.z).dot(forward) - 0.1)
-			var planar := Vector3(velocity.x, 0, velocity.z).normalized().slerp(forward, forward_speed * delta) * speed
-			velocity.x = planar.x
-			velocity.z = planar.z
+			var forward_speed := Vector2(velocity.x, velocity.z).dot(Vector2(forward.x, forward.z))
+			
+			if forward_speed > 5: # yea 5 is hardcoded (it's also used in planar calculation)
+				var speed := Vector2(velocity.x, velocity.z).length()
+				var planar := Vector3(velocity.x, 0, velocity.z).normalized().slerp(forward, airborne_course_correction * (speed - 5) * delta) * speed
+				velocity.x = planar.x
+				velocity.z = planar.z
 		
 	move_and_slide()
 
