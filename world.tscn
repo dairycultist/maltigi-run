@@ -1,4 +1,4 @@
-[gd_scene load_steps=10 format=3 uid="uid://pjh5004dwu6a"]
+[gd_scene load_steps=11 format=3 uid="uid://pjh5004dwu6a"]
 
 [ext_resource type="Script" uid="uid://vlcd5np3m2um" path="res://player_controller.gd" id="1_f3sb7"]
 [ext_resource type="Shader" uid="uid://c11i7ma3gm8tp" path="res://water.gdshader" id="2_fj7yv"]
@@ -31,6 +31,8 @@ shader = ExtResource("2_fj7yv")
 shader_parameter/Noise = SubResource("NoiseTexture3D_aqk2v")
 shader_parameter/Color = Color(0.12724, 0.196513, 0.138541, 1)
 
+[sub_resource type="WorldBoundaryShape3D" id="WorldBoundaryShape3D_aqk2v"]
+
 [node name="World" type="Node3D"]
 
 [node name="Player" type="CharacterBody3D" parent="." node_paths=PackedStringArray("camera")]
@@ -51,10 +53,17 @@ sky_mode = 1
 [node name="WorldEnvironment" type="WorldEnvironment" parent="."]
 environment = ExtResource("2_tlwt5")
 
-[node name="Water" type="MeshInstance3D" parent="."]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -1, 0)
-mesh = SubResource("QuadMesh_f3sb7")
-surface_material_override/0 = SubResource("ShaderMaterial_tlwt5")
-
 [node name="PlatformPlacer" type="Node3D" parent="."]
 script = ExtResource("6_dwbse")
+
+[node name="Water" type="StaticBody3D" parent="."]
+
+[node name="Mesh" type="MeshInstance3D" parent="Water"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -1, 0)
+mesh = SubResource("QuadMesh_f3sb7")
+skeleton = NodePath("../..")
+surface_material_override/0 = SubResource("ShaderMaterial_tlwt5")
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="Water"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -1.5, 0)
+shape = SubResource("WorldBoundaryShape3D_aqk2v")
