@@ -75,9 +75,12 @@ func _process(delta: float) -> void:
 		if is_on_floor():
 			velocity = lerp(velocity, Vector3.ZERO, delta * drag)
 		else:
-			# make planar velocity forward only
-			var forward = -get_global_transform().basis.z
-			var planar = Vector3(forward.x, 0, forward.z) * Vector2(velocity.x, velocity.z).length()
+			# make planar velocity slerp towards forward
+			# IF we are already going forwards
+			var forward := -get_global_transform().basis.z
+			var speed := Vector2(velocity.x, velocity.z).length()
+			var forward_speed = max(0, Vector3(velocity.x, 0, velocity.z).dot(forward) - 0.1)
+			var planar := Vector3(velocity.x, 0, velocity.z).normalized().slerp(forward, forward_speed * delta) * speed
 			velocity.x = planar.x
 			velocity.z = planar.z
 		
