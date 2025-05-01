@@ -1,23 +1,10 @@
-[gd_scene load_steps=13 format=3 uid="uid://pjh5004dwu6a"]
+[gd_scene load_steps=11 format=3 uid="uid://pjh5004dwu6a"]
 
 [ext_resource type="Script" uid="uid://vlcd5np3m2um" path="res://player_controller.gd" id="1_f3sb7"]
 [ext_resource type="Shader" uid="uid://c11i7ma3gm8tp" path="res://water.gdshader" id="2_fj7yv"]
+[ext_resource type="Environment" uid="uid://b7571yot1dx2a" path="res://default_env.tres" id="2_tlwt5"]
 
 [sub_resource type="CapsuleShape3D" id="CapsuleShape3D_gv5m4"]
-
-[sub_resource type="ProceduralSkyMaterial" id="ProceduralSkyMaterial_fj7yv"]
-sky_top_color = Color(0.171804, 0.507129, 0.825333, 1)
-sky_horizon_color = Color(0.598154, 0.667903, 0.706068, 1)
-ground_bottom_color = Color(0.0936433, 0.140217, 0.296259, 1)
-ground_horizon_color = Color(0.507731, 0.637382, 0.780147, 1)
-
-[sub_resource type="Sky" id="Sky_tlwt5"]
-sky_material = SubResource("ProceduralSkyMaterial_fj7yv")
-
-[sub_resource type="Environment" id="Environment_f3sb7"]
-background_mode = 2
-background_color = Color(0.0450303, 0.0662996, 0.124244, 1)
-sky = SubResource("Sky_tlwt5")
 
 [sub_resource type="BoxMesh" id="BoxMesh_f3sb7"]
 size = Vector3(10, 10, 10)
@@ -46,7 +33,7 @@ noise = SubResource("FastNoiseLite_fj7yv")
 render_priority = 0
 shader = ExtResource("2_fj7yv")
 shader_parameter/Noise = SubResource("NoiseTexture2D_tlwt5")
-shader_parameter/Color = Color(0.110898, 0.220198, 0.431058, 1)
+shader_parameter/Color = Color(0.12724, 0.196513, 0.138541, 1)
 
 [node name="World" type="Node3D"]
 
@@ -72,7 +59,7 @@ light_energy = 0.5
 sky_mode = 1
 
 [node name="WorldEnvironment" type="WorldEnvironment" parent="."]
-environment = SubResource("Environment_f3sb7")
+environment = ExtResource("2_tlwt5")
 
 [node name="Floor" type="StaticBody3D" parent="."]
 
