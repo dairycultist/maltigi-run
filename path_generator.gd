@@ -8,6 +8,10 @@ const PATH := preload("res://path.tscn")
 # items/modifiers
 # more enemies, randomly selected from (ex. one that makes all platforms icey)
 
+# in maltigi run I could add a gun and then have an upgrade that makes you shoot x10 slower BUT your bullets turn into rockets that push you back
+# one upgrade that makes it so your mag size is 1 but you reload super fast and another upgrade where your last bullet does x2 damage and it stacks
+# items are just 2D textures with a glow behind them
+
 const PATH_SIZE := 3
 const MAZE_SIZE := 15
 
