@@ -1,13 +1,52 @@
-[gd_scene load_steps=5 format=3 uid="uid://pjh5004dwu6a"]
+[gd_scene load_steps=13 format=3 uid="uid://pjh5004dwu6a"]
 
 [ext_resource type="Script" uid="uid://vlcd5np3m2um" path="res://player_controller.gd" id="1_f3sb7"]
-[ext_resource type="Script" uid="uid://4qq25euwydf1" path="res://path_generator.gd" id="3_tlwt5"]
+[ext_resource type="Shader" uid="uid://c11i7ma3gm8tp" path="res://water.gdshader" id="2_fj7yv"]
 
 [sub_resource type="CapsuleShape3D" id="CapsuleShape3D_gv5m4"]
 
+[sub_resource type="ProceduralSkyMaterial" id="ProceduralSkyMaterial_fj7yv"]
+sky_top_color = Color(0.171804, 0.507129, 0.825333, 1)
+sky_horizon_color = Color(0.598154, 0.667903, 0.706068, 1)
+ground_bottom_color = Color(0.0936433, 0.140217, 0.296259, 1)
+ground_horizon_color = Color(0.507731, 0.637382, 0.780147, 1)
+
+[sub_resource type="Sky" id="Sky_tlwt5"]
+sky_material = SubResource("ProceduralSkyMaterial_fj7yv")
+
 [sub_resource type="Environment" id="Environment_f3sb7"]
-background_mode = 1
+background_mode = 2
 background_color = Color(0.0450303, 0.0662996, 0.124244, 1)
+sky = SubResource("Sky_tlwt5")
+
+[sub_resource type="BoxMesh" id="BoxMesh_f3sb7"]
+size = Vector3(10, 10, 10)
+
+[sub_resource type="WorldBoundaryShape3D" id="WorldBoundaryShape3D_fj7yv"]
+
+[sub_resource type="QuadMesh" id="QuadMesh_f3sb7"]
+size = Vector2(100, 100)
+subdivide_width = 200
+subdivide_depth = 200
+orientation = 1
+
+[sub_resource type="FastNoiseLite" id="FastNoiseLite_fj7yv"]
+noise_type = 2
+seed = 1308
+frequency = 0.0079
+fractal_octaves = 2
+cellular_return_type = 3
+
+[sub_resource type="NoiseTexture2D" id="NoiseTexture2D_tlwt5"]
+seamless = true
+seamless_blend_skirt = 0.612
+noise = SubResource("FastNoiseLite_fj7yv")
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_tlwt5"]
+render_priority = 0
+shader = ExtResource("2_fj7yv")
+shader_parameter/Noise = SubResource("NoiseTexture2D_tlwt5")
+shader_parameter/Color = Color(0.110898, 0.220198, 0.431058, 1)
 
 [node name="World" type="Node3D"]
 
@@ -23,7 +62,7 @@ shape = SubResource("CapsuleShape3D_gv5m4")
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1.5, 0)
 
 [node name="DirectionalLight3D" type="DirectionalLight3D" parent="."]
-transform = Transform3D(0.191835, 0.97278, -0.129994, -0.805301, 0.231731, 0.545702, 0.560971, 0, 0.827835, 0, 0, 0)
+transform = Transform3D(0.820676, -0.259777, -0.508926, 0.566335, 0.48805, 0.664132, 0.0758543, -0.833261, 0.547652, 0, 4.62799, 0)
 sky_mode = 1
 
 [node name="DirectionalLight3D" type="DirectionalLight3D" parent="DirectionalLight3D"]
@@ -35,5 +74,16 @@ sky_mode = 1
 [node name="WorldEnvironment" type="WorldEnvironment" parent="."]
 environment = SubResource("Environment_f3sb7")
 
-[node name="PathGenerator" type="Node3D" parent="."]
-script = ExtResource("3_tlwt5")
+[node name="Floor" type="StaticBody3D" parent="."]
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="Floor"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -5, 0)
+mesh = SubResource("BoxMesh_f3sb7")
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="Floor"]
+shape = SubResource("WorldBoundaryShape3D_fj7yv")
+
+[node name="Water" type="MeshInstance3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -1, 0)
+mesh = SubResource("QuadMesh_f3sb7")
+surface_material_override/0 = SubResource("ShaderMaterial_tlwt5")
