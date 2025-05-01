@@ -17,15 +17,21 @@ extends CharacterBody3D
 @export var drag := 8
 @export var grounded_accel := 50
 @export var airborne_accel := 10
+@export var flying_accel := 200
 @export var jump_speed := 8
 @export var max_fall_speed := 32
 
 var camera_pitch := 0.0
 
+var is_flying := false
+
 func _ready() -> void:
 	Input.set_mouse_mode(Input.MOUSE_MODE_CAPTURED)
 
 func _process(delta: float) -> void:
+	
+	if Input.is_action_just_pressed("toggle_fly"):
+		is_flying = not is_flying
 	
 	if (position.y < -10):
 		position = Vector3.ZERO
@@ -34,31 +40,47 @@ func _process(delta: float) -> void:
 	# movement
 	var input_dir := Input.get_vector("walk_left", "walk_right", "walk_up", "walk_down")
 	var direction := (transform.basis * Vector3(input_dir.x, 0, input_dir.y)).normalized()
+	
+	if is_flying:
 		
-	if (velocity.y > -max_fall_speed):
-		velocity += get_gravity() * 2.5 * delta
+		if direction:
+			velocity.x += direction.x * flying_accel * delta
+			velocity.z += direction.z * flying_accel * delta
+			
+		if Input.is_action_pressed("jump"):
+			velocity.y += flying_accel * delta
+		
+		if Input.is_action_pressed("crouch"):
+			velocity.y -= flying_accel * delta
+			
+		velocity = lerp(velocity, Vector3.ZERO, delta * drag)
+		
+	else:
 	
-	if Input.is_action_pressed("ui_accept") and is_on_floor():
-		velocity.y = jump_speed
-	
-	if direction:
+		if (velocity.y > -max_fall_speed):
+			velocity += get_gravity() * 2.5 * delta
+		
+		if Input.is_action_pressed("jump") and is_on_floor():
+			velocity.y = jump_speed
+		
+		if direction:
+			
+			if is_on_floor():
+				velocity.x += direction.x * grounded_accel * delta
+				velocity.z += direction.z * grounded_accel * delta
+			else:
+				velocity.x += direction.x * airborne_accel * delta
+				velocity.z += direction.z * airborne_accel * delta
 		
 		if is_on_floor():
-			velocity.x += direction.x * grounded_accel * delta
-			velocity.z += direction.z * grounded_accel * delta
+			velocity = lerp(velocity, Vector3.ZERO, delta * drag)
 		else:
-			velocity.x += direction.x * airborne_accel * delta
-			velocity.z += direction.z * airborne_accel * delta
-	
-	if is_on_floor():
-		velocity = lerp(velocity, Vector3.ZERO, delta * drag)
-	else:
-		# make planar velocity forward only
-		var forward = -get_global_transform().basis.z
-		var planar = Vector3(forward.x, 0, forward.z) * Vector2(velocity.x, velocity.z).length()
-		velocity.x = planar.x
-		velocity.z = planar.z
-	
+			# make planar velocity forward only
+			var forward = -get_global_transform().basis.z
+			var planar = Vector3(forward.x, 0, forward.z) * Vector2(velocity.x, velocity.z).length()
+			velocity.x = planar.x
+			velocity.z = planar.z
+		
 	move_and_slide()
 
 

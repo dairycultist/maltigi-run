@@ -8,9 +8,9 @@
 [sub_resource type="CapsuleShape3D" id="CapsuleShape3D_gv5m4"]
 
 [sub_resource type="QuadMesh" id="QuadMesh_f3sb7"]
-size = Vector2(100, 100)
-subdivide_width = 200
-subdivide_depth = 200
+size = Vector2(200, 200)
+subdivide_width = 400
+subdivide_depth = 400
 orientation = 1
 
 [sub_resource type="FastNoiseLite" id="FastNoiseLite_tlwt5"]
