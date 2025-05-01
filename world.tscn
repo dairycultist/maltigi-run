@@ -20,7 +20,7 @@ orientation = 1
 [sub_resource type="FastNoiseLite" id="FastNoiseLite_tlwt5"]
 noise_type = 2
 seed = 1308
-frequency = 0.026
+frequency = 0.0486
 fractal_octaves = 2
 cellular_return_type = 3
 
@@ -49,7 +49,7 @@ shape = SubResource("CapsuleShape3D_gv5m4")
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1.5, 0)
 
 [node name="DirectionalLight3D" type="DirectionalLight3D" parent="."]
-transform = Transform3D(0.820676, -0.259777, -0.508926, 0.566335, 0.48805, 0.664132, 0.0758543, -0.833261, 0.547652, 0, 4.62799, 0)
+transform = Transform3D(1, 0, 0, 0, 0.927712, 0.373296, 0, -0.373296, 0.927712, 0, 4.62799, 0)
 sky_mode = 1
 
 [node name="DirectionalLight3D" type="DirectionalLight3D" parent="DirectionalLight3D"]

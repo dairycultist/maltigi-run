@@ -1,7 +1,6 @@
 extends CharacterBody3D
 
 # what if battle royale https://www.youtube.com/watch?v=LG2eXmozbH8
-# water shader that uses depth texture to make shallow areas more translucent
 # each hexagon has a cutout for a ladder (goes all the way down to water!)
 # hexagons are made of concrete. ladder is probably a nice bright orange.
 # maybe cutout is a bit wider than ladder, so up top there's a grate to either
