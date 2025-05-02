@@ -13,12 +13,12 @@ extends CharacterBody3D
 @export var mouse_sensitivity := 0.3
 
 @export var drag := 15
-@export var grounded_accel := 170
+@export var grounded_accel := 160
 @export var airborne_accel := 10
 @export var flying_accel := 200
 @export var jump_speed := 8
 @export var max_fall_speed := 32
-@export var airborne_course_correction := 0.2
+@export var airborne_course_correction := 0.4
 
 var camera_pitch := 0.0
 
