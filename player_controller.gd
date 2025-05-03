@@ -1,8 +1,8 @@
 extends CharacterBody3D
 
-# what if battle royale https://www.youtube.com/watch?v=LG2eXmozbH8
 # need a separate mesh for collision
-# fast paced gameplay
+# bot navmesh
+# fast paced, wave gameplay
 
 # splash particle effect when landing in water
 
