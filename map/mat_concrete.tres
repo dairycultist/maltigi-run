@@ -1,8 +1,10 @@
-[gd_resource type="StandardMaterial3D" load_steps=2 format=3 uid="uid://dn6ue2na0r03a"]
+[gd_resource type="ShaderMaterial" load_steps=3 format=3 uid="uid://cck84q7aw8x5d"]
 
 [ext_resource type="Texture2D" uid="uid://cyapu8pss3id1" path="res://map/tex_concrete.jpg" id="1_boyea"]
+[ext_resource type="Shader" uid="uid://bu0y4f0oyfgqm" path="res://retro.gdshader" id="1_x1myk"]
 
 [resource]
-albedo_texture = ExtResource("1_boyea")
-metallic_specular = 0.0
-uv1_scale = Vector3(10, 10, 10)
+render_priority = 0
+shader = ExtResource("1_x1myk")
+shader_parameter/albedo = ExtResource("1_boyea")
+shader_parameter/uv_scale = 4.0

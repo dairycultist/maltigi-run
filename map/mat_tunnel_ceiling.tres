@@ -1,0 +1,10 @@
+[gd_resource type="ShaderMaterial" load_steps=3 format=3 uid="uid://dnhd1fx22eje4"]
+
+[ext_resource type="Shader" uid="uid://bu0y4f0oyfgqm" path="res://retro.gdshader" id="1_d0ddh"]
+[ext_resource type="Texture2D" uid="uid://bkpxm7dt7vj1j" path="res://map/tex_panel.jpg" id="2_o4g4h"]
+
+[resource]
+render_priority = 0
+shader = ExtResource("1_d0ddh")
+shader_parameter/albedo = ExtResource("2_o4g4h")
+shader_parameter/uv_scale = 8.0

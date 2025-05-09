@@ -1,0 +1,10 @@
+[gd_resource type="ShaderMaterial" load_steps=3 format=3 uid="uid://cn3td3iq7k4fn"]
+
+[ext_resource type="Shader" uid="uid://bu0y4f0oyfgqm" path="res://retro.gdshader" id="1_fu5ik"]
+[ext_resource type="Texture2D" uid="uid://drahcdd0p6v3f" path="res://map/tex_tunnel.jpg" id="1_hicat"]
+
+[resource]
+render_priority = 0
+shader = ExtResource("1_fu5ik")
+shader_parameter/albedo = ExtResource("1_hicat")
+shader_parameter/uv_scale = 1.0
