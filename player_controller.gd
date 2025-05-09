@@ -1,5 +1,9 @@
 extends CharacterBody3D
 
+# probably simplify map shape (mostly boxy = good)
+# mapmaking is fun
+# CS1 inspired bc ofc https://m.media-amazon.com/images/I/61Qdn31BpAL.jpg
+
 # need a separate mesh for collision
 # bot navmesh
 # fast paced, wave gameplay
