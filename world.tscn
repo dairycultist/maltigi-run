@@ -55,6 +55,10 @@ orientation = 0
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 30, 0)
 script = ExtResource("1_f3sb7")
 camera = NodePath("Camera3D")
+drag = 14
+grounded_accel = 120
+airborne_accel = 5
+airborne_course_correction = 1.1
 
 [node name="CollisionShape3D" type="CollisionShape3D" parent="Player"]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1, 0)
