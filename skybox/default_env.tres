@@ -1,0 +1,19 @@
+[gd_resource type="Environment" load_steps=4 format=3 uid="uid://b7571yot1dx2a"]
+
+[ext_resource type="Texture2D" uid="uid://ctfx72xsle2n1" path="res://skybox/sky_apocalypse_land.png" id="1_ooua1"]
+
+[sub_resource type="PanoramaSkyMaterial" id="PanoramaSkyMaterial_ujk5d"]
+panorama = ExtResource("1_ooua1")
+
+[sub_resource type="Sky" id="Sky_gk03p"]
+sky_material = SubResource("PanoramaSkyMaterial_ujk5d")
+
+[resource]
+background_mode = 2
+sky = SubResource("Sky_gk03p")
+ssao_enabled = true
+ssao_intensity = 2.12
+ssao_power = 5.22327
+ssao_detail = 0.0
+ssao_horizon = 0.0
+ssao_sharpness = 1.0

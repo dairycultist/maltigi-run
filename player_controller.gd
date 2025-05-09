@@ -36,7 +36,7 @@ func _process(delta: float) -> void:
 		velocity = Vector3.ZERO
 	
 	if (position.y < -10):
-		position = Vector3.ZERO
+		position = Vector3(0, 10, 0)
 		velocity = Vector3.ZERO
 	
 	# movement
