@@ -8,16 +8,14 @@ extends CharacterBody3D
 # bot navmesh
 # fast paced, wave gameplay
 
-const BULLET_HOLE = preload("res://tst.tscn")
-
-@export_group("Misc")
-@export var camera : Camera3D
+var random = RandomNumberGenerator.new()
 
 var camera_pitch := 0.0
 var is_flying := false
 
 @export_group("Gun")
 @export var firerate := 12
+@export var audiostream_fire : AudioStreamPlayer3D
 
 var fire_cooldown_remaining := 0.0
 
@@ -37,10 +35,12 @@ func _ready() -> void:
 
 func _process(delta: float) -> void:
 	
+	# fly
 	if Input.is_action_just_pressed("toggle_fly"):
 		is_flying = not is_flying
 		velocity = Vector3.ZERO
 	
+	# kill floor
 	if (position.y < -10):
 		position = Vector3(0, 10, 0)
 		velocity = Vector3.ZERO
@@ -51,16 +51,15 @@ func _process(delta: float) -> void:
 		if Input.is_action_pressed("fire"):
 		
 			var space_state = get_world_3d().direct_space_state
-			var query = PhysicsRayQueryParameters3D.create(camera.global_position, camera.global_position - camera.get_global_transform().basis.z * 100)
+			var query = PhysicsRayQueryParameters3D.create($Camera3D.global_position, $Camera3D.global_position - $Camera3D.get_global_transform().basis.z * 100)
 			var result = space_state.intersect_ray(query)
 			
-			if result:
-				if result.collider.has_method("on_shot"):
-					result.collider.on_shot()
-				else:
-					var bullet_hole = BULLET_HOLE.instantiate()
-					get_tree().root.add_child(bullet_hole)
-					bullet_hole.global_position = result.position + result.normal * 0.01
+			if result and result.collider.has_method("on_shot"):
+				result.collider.on_shot()
+			
+			audiostream_fire.volume_linear = random.randf_range(0.8, 1.0)
+			audiostream_fire.pitch_scale = random.randf_range(0.95, 1.05)
+			audiostream_fire.play()
 			
 			fire_cooldown_remaining = 1.0 / firerate
 			
@@ -132,4 +131,4 @@ func _input(event):
 		
 		camera_pitch = clampf(camera_pitch - event.relative.y * mouse_sensitivity, -90, 90)
 		
-		camera.rotation.x = deg_to_rad(camera_pitch)
+		$Camera3D.rotation.x = deg_to_rad(camera_pitch)

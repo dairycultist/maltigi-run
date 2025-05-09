@@ -1,6 +1,7 @@
-[gd_scene load_steps=16 format=3 uid="uid://pjh5004dwu6a"]
+[gd_scene load_steps=18 format=3 uid="uid://pjh5004dwu6a"]
 
 [ext_resource type="Script" uid="uid://vlcd5np3m2um" path="res://player_controller.gd" id="1_f3sb7"]
+[ext_resource type="AudioStream" uid="uid://clpeljf08wdu1" path="res://gunshot.wav" id="2_2o6r5"]
 [ext_resource type="Environment" uid="uid://b7571yot1dx2a" path="res://skybox/default_env.tres" id="2_tlwt5"]
 [ext_resource type="ArrayMesh" uid="uid://c2qvo6f1oqpsc" path="res://map/facility.obj" id="4_ic0uy"]
 [ext_resource type="Material" uid="uid://cck84q7aw8x5d" path="res://map/mat_concrete.tres" id="5_dwbse"]
@@ -11,6 +12,7 @@
 [ext_resource type="Texture2D" uid="uid://ckxg8mcbv12ky" path="res://map/graffiti.png" id="9_ioo17"]
 [ext_resource type="Material" uid="uid://de0ds530dqquc" path="res://map/mat_fence.tres" id="9_k3n1d"]
 [ext_resource type="Material" uid="uid://bma5h4x8gjt3n" path="res://map/mat_rock.tres" id="10_ic0uy"]
+[ext_resource type="Texture2D" uid="uid://csce2q7svuxhb" path="res://crosshair.png" id="12_k3n1d"]
 
 [sub_resource type="CapsuleShape3D" id="CapsuleShape3D_gv5m4"]
 
@@ -28,10 +30,13 @@ orientation = 0
 
 [node name="World" type="Node3D"]
 
-[node name="Player" type="CharacterBody3D" parent="." node_paths=PackedStringArray("camera")]
+[node name="Player" type="CharacterBody3D" parent="." node_paths=PackedStringArray("audiostream_fire")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 30, 0)
 script = ExtResource("1_f3sb7")
-camera = NodePath("Camera3D")
+audiostream_fire = NodePath("AudioStreamFire")
+drag = 14.0
+grounded_accel = 120.0
+airborne_accel = 6.0
 airborne_course_correction = 1.1
 
 [node name="CollisionShape3D" type="CollisionShape3D" parent="Player"]
@@ -40,6 +45,9 @@ shape = SubResource("CapsuleShape3D_gv5m4")
 
 [node name="Camera3D" type="Camera3D" parent="Player"]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1.5, 0)
+
+[node name="AudioStreamFire" type="AudioStreamPlayer3D" parent="Player"]
+stream = ExtResource("2_2o6r5")
 
 [node name="Sun" type="DirectionalLight3D" parent="."]
 transform = Transform3D(0.885377, -0.173535, 0.431268, 0, 0.927712, 0.373296, -0.464873, -0.330508, 0.821376, 0, 4.62799, 0)
@@ -75,15 +83,18 @@ transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.605522, 5.32759, -21.0928)
 material_override = SubResource("StandardMaterial3D_gbfbk")
 mesh = SubResource("PlaneMesh_ic0uy")
 
-[node name="Crosshair" type="ColorRect" parent="."]
+[node name="Crosshair" type="TextureRect" parent="."]
+texture_filter = 1
 anchors_preset = 8
 anchor_left = 0.5
 anchor_top = 0.5
 anchor_right = 0.5
 anchor_bottom = 0.5
-offset_left = -5.0
-offset_top = -5.0
-offset_right = 5.0
-offset_bottom = 5.0
+offset_left = -20.0
+offset_top = -20.0
+offset_right = 20.0
+offset_bottom = 20.0
 grow_horizontal = 2
 grow_vertical = 2
+texture = ExtResource("12_k3n1d")
+expand_mode = 1
