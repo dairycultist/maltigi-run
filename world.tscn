@@ -45,7 +45,7 @@ transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1.5, 0)
 
 [node name="Sun" type="DirectionalLight3D" parent="."]
 transform = Transform3D(0.885377, -0.173535, 0.431268, 0, 0.927712, 0.373296, -0.464873, -0.330508, 0.821376, 0, 4.62799, 0)
-light_energy = 2.0
+light_energy = 1.5
 light_bake_mode = 1
 sky_mode = 1
 

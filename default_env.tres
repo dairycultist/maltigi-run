@@ -11,3 +11,9 @@ sky_material = SubResource("PanoramaSkyMaterial_ujk5d")
 [resource]
 background_mode = 2
 sky = SubResource("Sky_gk03p")
+ssao_enabled = true
+ssao_intensity = 2.12
+ssao_power = 5.22327
+ssao_detail = 0.0
+ssao_horizon = 0.0
+ssao_sharpness = 1.0
