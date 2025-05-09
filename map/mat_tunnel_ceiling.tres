@@ -8,3 +8,4 @@ render_priority = 0
 shader = ExtResource("1_d0ddh")
 shader_parameter/albedo = ExtResource("2_o4g4h")
 shader_parameter/uv_scale = 8.0
+shader_parameter/alpha_cutoff = 0.5

@@ -8,8 +8,6 @@ extends CharacterBody3D
 # bot navmesh
 # fast paced, wave gameplay
 
-# splash particle effect when landing in water
-
 @export_group("Misc")
 @export var camera : Camera3D
 
@@ -19,8 +17,8 @@ extends CharacterBody3D
 @export var drag := 15
 @export var grounded_accel := 160
 @export var airborne_accel := 10
-@export var flying_accel := 200
 @export var jump_speed := 8
+@export var flying_speed := 20
 @export var max_fall_speed := 32
 @export var airborne_course_correction := 0.4
 
@@ -35,6 +33,7 @@ func _process(delta: float) -> void:
 	
 	if Input.is_action_just_pressed("toggle_fly"):
 		is_flying = not is_flying
+		velocity = Vector3.ZERO
 	
 	if (position.y < -10):
 		position = Vector3.ZERO
@@ -47,16 +46,13 @@ func _process(delta: float) -> void:
 	if is_flying:
 		
 		if direction:
-			velocity.x += direction.x * flying_accel * delta
-			velocity.z += direction.z * flying_accel * delta
+			position += direction * flying_speed * delta
 			
 		if Input.is_action_pressed("jump"):
-			velocity.y += flying_accel * delta
+			position.y += flying_speed * delta
 		
 		if Input.is_action_pressed("crouch"):
-			velocity.y -= flying_accel * delta
-			
-		velocity = lerp(velocity, Vector3.ZERO, delta * drag)
+			position.y -= flying_speed * delta
 		
 	else:
 	
@@ -90,7 +86,7 @@ func _process(delta: float) -> void:
 				velocity.x = planar.x
 				velocity.z = planar.z
 		
-	move_and_slide()
+		move_and_slide()
 
 
 func _input(event):
