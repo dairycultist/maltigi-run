@@ -3,7 +3,7 @@
 importer="texture"
 type="CompressedTexture2D"
 uid="uid://cyapu8pss3id1"
-path.s3tc="res://.godot/imported/tex_floor.jpg-5ef5964d3f1db3e3ddf406790e55bdd2.s3tc.ctex"
+path.s3tc="res://.godot/imported/tex_concrete.jpg-9a4197e7e7c6ccc473a432840003b24b.s3tc.ctex"
 metadata={
 "imported_formats": ["s3tc_bptc"],
 "vram_texture": true
@@ -11,8 +11,8 @@ metadata={
 
 [deps]
 
-source_file="res://map/tex_floor.jpg"
-dest_files=["res://.godot/imported/tex_floor.jpg-5ef5964d3f1db3e3ddf406790e55bdd2.s3tc.ctex"]
+source_file="res://map/tex_concrete.jpg"
+dest_files=["res://.godot/imported/tex_concrete.jpg-9a4197e7e7c6ccc473a432840003b24b.s3tc.ctex"]
 
 [params]
 

@@ -5,3 +5,5 @@
 [resource]
 albedo_color = Color(0.411121, 0.447061, 0.340407, 1)
 albedo_texture = ExtResource("1_4q3iq")
+metallic_specular = 0.0
+uv1_scale = Vector3(2, 2, 2)
