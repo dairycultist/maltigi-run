@@ -32,9 +32,6 @@ orientation = 0
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 30, 0)
 script = ExtResource("1_f3sb7")
 camera = NodePath("Camera3D")
-drag = 14
-grounded_accel = 120
-airborne_accel = 5
 airborne_course_correction = 1.1
 
 [node name="CollisionShape3D" type="CollisionShape3D" parent="Player"]
@@ -77,3 +74,16 @@ shape = SubResource("ConcavePolygonShape3D_hiqwa")
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.605522, 5.32759, -21.0928)
 material_override = SubResource("StandardMaterial3D_gbfbk")
 mesh = SubResource("PlaneMesh_ic0uy")
+
+[node name="Crosshair" type="ColorRect" parent="."]
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -5.0
+offset_top = -5.0
+offset_right = 5.0
+offset_bottom = 5.0
+grow_horizontal = 2
+grow_vertical = 2

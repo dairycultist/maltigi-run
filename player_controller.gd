@@ -8,23 +8,29 @@ extends CharacterBody3D
 # bot navmesh
 # fast paced, wave gameplay
 
+const BULLET_HOLE = preload("res://tst.tscn")
+
 @export_group("Misc")
 @export var camera : Camera3D
+
+var camera_pitch := 0.0
+var is_flying := false
+
+@export_group("Gun")
+@export var firerate := 12
+
+var fire_cooldown_remaining := 0.0
 
 @export_group("Movement")
 @export var mouse_sensitivity := 0.3
 
-@export var drag := 15
-@export var grounded_accel := 160
-@export var airborne_accel := 10
-@export var jump_speed := 8
-@export var flying_speed := 20
-@export var max_fall_speed := 32
+@export var drag := 15.0
+@export var grounded_accel := 160.0
+@export var airborne_accel := 10.0
+@export var jump_speed := 8.0
+@export var flying_speed := 20.0
+@export var max_fall_speed := 32.0
 @export var airborne_course_correction := 0.4
-
-var camera_pitch := 0.0
-
-var is_flying := false
 
 func _ready() -> void:
 	Input.set_mouse_mode(Input.MOUSE_MODE_CAPTURED)
@@ -38,6 +44,28 @@ func _process(delta: float) -> void:
 	if (position.y < -10):
 		position = Vector3(0, 10, 0)
 		velocity = Vector3.ZERO
+	
+	# firing
+	if fire_cooldown_remaining <= 0.0:
+		
+		if Input.is_action_pressed("fire"):
+		
+			var space_state = get_world_3d().direct_space_state
+			var query = PhysicsRayQueryParameters3D.create(camera.global_position, camera.global_position - camera.get_global_transform().basis.z * 100)
+			var result = space_state.intersect_ray(query)
+			
+			if result:
+				if result.collider.has_method("on_shot"):
+					result.collider.on_shot()
+				else:
+					var bullet_hole = BULLET_HOLE.instantiate()
+					get_tree().root.add_child(bullet_hole)
+					bullet_hole.global_position = result.position + result.normal * 0.01
+			
+			fire_cooldown_remaining = 1.0 / firerate
+			
+	else:
+		fire_cooldown_remaining -= delta
 	
 	# movement
 	var input_dir := Input.get_vector("walk_left", "walk_right", "walk_up", "walk_down")
