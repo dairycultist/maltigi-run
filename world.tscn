@@ -1,12 +1,13 @@
-[gd_scene load_steps=20 format=3 uid="uid://pjh5004dwu6a"]
+[gd_scene load_steps=21 format=3 uid="uid://pjh5004dwu6a"]
 
 [ext_resource type="Script" uid="uid://vlcd5np3m2um" path="res://player_controller.gd" id="1_f3sb7"]
 [ext_resource type="Shader" uid="uid://c11i7ma3gm8tp" path="res://water.gdshader" id="2_fj7yv"]
 [ext_resource type="Environment" uid="uid://b7571yot1dx2a" path="res://default_env.tres" id="2_tlwt5"]
-[ext_resource type="ArrayMesh" uid="uid://c2qvo6f1oqpsc" path="res://map/italy.obj" id="4_aqk2v"]
+[ext_resource type="ArrayMesh" uid="uid://c2qvo6f1oqpsc" path="res://map/facility.obj" id="4_ic0uy"]
 [ext_resource type="Material" uid="uid://dwqpevj4kwb41" path="res://map/mat_grass.tres" id="5_036b0"]
 [ext_resource type="Material" uid="uid://dn6ue2na0r03a" path="res://map/mat_concrete.tres" id="5_dwbse"]
 [ext_resource type="Material" uid="uid://r6w622w7jmqg" path="res://map/mat_hedge.tres" id="6_dwbse"]
+[ext_resource type="Material" uid="uid://cf17pdplr6fhd" path="res://map/mat_panel.tres" id="6_k3n1d"]
 [ext_resource type="Material" uid="uid://ddolse01lls00" path="res://map/mat_tunnel.tres" id="7_gbfbk"]
 [ext_resource type="Material" uid="uid://svy7qsh5jkqp" path="res://map/mat_crate.tres" id="8_gbfbk"]
 [ext_resource type="Texture2D" uid="uid://ckxg8mcbv12ky" path="res://map/graffiti.png" id="9_ioo17"]
@@ -88,19 +89,22 @@ shape = SubResource("WorldBoundaryShape3D_aqk2v")
 
 [node name="Map" type="StaticBody3D" parent="."]
 
-[node name="Italy" type="MeshInstance3D" parent="Map"]
-mesh = ExtResource("4_aqk2v")
+[node name="Facility" type="MeshInstance3D" parent="Map"]
+mesh = ExtResource("4_ic0uy")
 skeleton = NodePath("../..")
 surface_material_override/0 = ExtResource("8_gbfbk")
 surface_material_override/1 = ExtResource("8_gbfbk")
 surface_material_override/2 = ExtResource("8_gbfbk")
 surface_material_override/3 = ExtResource("8_gbfbk")
 surface_material_override/4 = ExtResource("8_gbfbk")
+surface_material_override/5 = ExtResource("6_k3n1d")
 surface_material_override/6 = ExtResource("5_dwbse")
 surface_material_override/7 = ExtResource("7_gbfbk")
-surface_material_override/8 = ExtResource("5_036b0")
-surface_material_override/9 = ExtResource("5_dwbse")
-surface_material_override/10 = ExtResource("6_dwbse")
+surface_material_override/8 = ExtResource("6_k3n1d")
+surface_material_override/9 = ExtResource("5_036b0")
+surface_material_override/10 = ExtResource("5_dwbse")
+surface_material_override/11 = ExtResource("6_dwbse")
+surface_material_override/12 = ExtResource("6_k3n1d")
 
 [node name="CollisionShape3D" type="CollisionShape3D" parent="Map"]
 shape = SubResource("ConcavePolygonShape3D_wse8f")

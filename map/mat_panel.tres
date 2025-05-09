@@ -1,0 +1,9 @@
+[gd_resource type="StandardMaterial3D" load_steps=2 format=3 uid="uid://cf17pdplr6fhd"]
+
+[ext_resource type="Texture2D" uid="uid://bkpxm7dt7vj1j" path="res://map/tex_panel.jpg" id="1_fl8vr"]
+
+[resource]
+albedo_color = Color(0.867843, 0.788217, 0.62149, 1)
+albedo_texture = ExtResource("1_fl8vr")
+metallic_specular = 0.0
+uv1_scale = Vector3(10, 10, 10)
