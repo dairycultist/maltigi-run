@@ -5,7 +5,7 @@ extends CharacterBody3D
 # CS1 inspired bc ofc https://m.media-amazon.com/images/I/61Qdn31BpAL.jpg
 
 # need a separate mesh for collision
-# bot navmesh
+# bot navnodes
 # fast paced, wave gameplay
 
 var random = RandomNumberGenerator.new()
