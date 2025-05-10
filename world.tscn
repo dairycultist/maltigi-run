@@ -1,4 +1,4 @@
-[gd_scene load_steps=19 format=3 uid="uid://pjh5004dwu6a"]
+[gd_scene load_steps=24 format=3 uid="uid://pjh5004dwu6a"]
 
 [ext_resource type="Script" uid="uid://vlcd5np3m2um" path="res://player_controller.gd" id="1_f3sb7"]
 [ext_resource type="AudioStream" uid="uid://clpeljf08wdu1" path="res://gunshot.wav" id="2_2o6r5"]
@@ -14,6 +14,8 @@
 [ext_resource type="Material" uid="uid://bma5h4x8gjt3n" path="res://map/mat_rock.tres" id="10_ic0uy"]
 [ext_resource type="Material" uid="uid://cohmd1i5hcq41" path="res://map/mat_door.tres" id="11_70uel"]
 [ext_resource type="Texture2D" uid="uid://csce2q7svuxhb" path="res://crosshair.png" id="12_k3n1d"]
+[ext_resource type="Script" uid="uid://6xhhlo8dqe32" path="res://nav_agent.gd" id="15_hiqwa"]
+[ext_resource type="Script" uid="uid://bag0qs86ij634" path="res://path.gd" id="16_2u3nc"]
 
 [sub_resource type="CapsuleShape3D" id="CapsuleShape3D_gv5m4"]
 
@@ -29,10 +31,17 @@ metallic_specular = 0.0
 size = Vector2(4, 4)
 orientation = 0
 
+[sub_resource type="CapsuleShape3D" id="CapsuleShape3D_70uel"]
+
+[sub_resource type="CapsuleMesh" id="CapsuleMesh_hiqwa"]
+
+[sub_resource type="BoxMesh" id="BoxMesh_2u3nc"]
+size = Vector3(0.5, 0.5, 1)
+
 [node name="World" type="Node3D"]
 
 [node name="Player" type="CharacterBody3D" parent="." node_paths=PackedStringArray("audiostream_fire")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 30, 0)
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 7.88196, 7, -3.51209)
 script = ExtResource("1_f3sb7")
 audiostream_fire = NodePath("AudioStreamFire")
 drag = 14.0
@@ -96,3 +105,36 @@ grow_horizontal = 2
 grow_vertical = 2
 texture = ExtResource("12_k3n1d")
 expand_mode = 1
+
+[node name="Enemy" type="CharacterBody3D" parent="." node_paths=PackedStringArray("target", "path")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 5.25956, -5.27686)
+script = ExtResource("15_hiqwa")
+target = NodePath("../Player")
+path = NodePath("../Path")
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="Enemy"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1, 0)
+shape = SubResource("CapsuleShape3D_70uel")
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="Enemy"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1, 0)
+mesh = SubResource("CapsuleMesh_hiqwa")
+
+[node name="MeshInstance3D2" type="MeshInstance3D" parent="Enemy"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.328033, 1.53896, 0)
+mesh = SubResource("BoxMesh_2u3nc")
+
+[node name="Path" type="Node3D" parent="."]
+script = ExtResource("16_2u3nc")
+
+[node name="Target0" type="Node3D" parent="Path"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 3.11452, 5.01033, -3.84672)
+metadata/neighbors = PackedInt32Array(1, 2)
+
+[node name="Target1" type="Node3D" parent="Path"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 13.9127, 5.01033, -3.84672)
+metadata/neighbors = PackedInt32Array(0)
+
+[node name="Target2" type="Node3D" parent="Path"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -13.6086, 3.57373, -3.84672)
+metadata/neighbors = PackedInt32Array(0)
