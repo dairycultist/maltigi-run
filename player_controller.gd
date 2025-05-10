@@ -84,7 +84,7 @@ func _process(delta: float) -> void:
 	else:
 	
 		if (velocity.y > -max_fall_speed):
-			velocity += get_gravity() * 2.5 * delta
+			velocity += get_gravity() * delta
 		
 		if Input.is_action_pressed("jump") and is_on_floor():
 			velocity.y = jump_speed

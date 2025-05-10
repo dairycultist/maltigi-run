@@ -47,6 +47,7 @@ audiostream_fire = NodePath("AudioStreamFire")
 drag = 14.0
 grounded_accel = 120.0
 airborne_accel = 6.0
+jump_speed = 8.25
 airborne_course_correction = 1.1
 
 [node name="CollisionShape3D" type="CollisionShape3D" parent="Player"]
@@ -124,17 +125,55 @@ mesh = SubResource("CapsuleMesh_hiqwa")
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.328033, 1.53896, 0)
 mesh = SubResource("BoxMesh_2u3nc")
 
+[node name="Enemy2" type="CharacterBody3D" parent="." node_paths=PackedStringArray("target", "path")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 9.24238, 5.25956, -13.6914)
+script = ExtResource("15_hiqwa")
+target = NodePath("../Player")
+path = NodePath("../Path")
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="Enemy2"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1, 0)
+shape = SubResource("CapsuleShape3D_70uel")
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="Enemy2"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1, 0)
+mesh = SubResource("CapsuleMesh_hiqwa")
+
+[node name="MeshInstance3D2" type="MeshInstance3D" parent="Enemy2"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.328033, 1.53896, 0)
+mesh = SubResource("BoxMesh_2u3nc")
+
 [node name="Path" type="Node3D" parent="."]
 script = ExtResource("16_2u3nc")
 
 [node name="Target0" type="Node3D" parent="Path"]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 3.11452, 5.01033, -3.84672)
-metadata/neighbors = PackedInt32Array(1, 2)
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 1.51606, 5.01033, -3.84672)
+metadata/neighbors = PackedInt32Array(6, 2)
 
 [node name="Target1" type="Node3D" parent="Path"]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 13.9127, 5.01033, -3.84672)
-metadata/neighbors = PackedInt32Array(0)
+metadata/neighbors = PackedInt32Array(6, 5, 7)
 
 [node name="Target2" type="Node3D" parent="Path"]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -13.6086, 3.57373, -3.84672)
-metadata/neighbors = PackedInt32Array(0)
+metadata/neighbors = PackedInt32Array(0, 3)
+
+[node name="Target3" type="Node3D" parent="Path"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -12.7391, 3.57373, -26.3589)
+metadata/neighbors = PackedInt32Array(2, 4)
+
+[node name="Target4" type="Node3D" parent="Path"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 3.10025, 3.57373, -26.3589)
+metadata/neighbors = PackedInt32Array(3, 5)
+
+[node name="Target5" type="Node3D" parent="Path"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 5.39744, 3.57373, -14.2755)
+metadata/neighbors = PackedInt32Array(4, 7)
+
+[node name="Target6" type="Node3D" parent="Path"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 6.8447, 5.01033, -3.84672)
+metadata/neighbors = PackedInt32Array(0, 1, 5, 7)
+
+[node name="Target7" type="Node3D" parent="Path"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 15.594, 3.57373, -14.2755)
+metadata/neighbors = PackedInt32Array(5)
