@@ -2,8 +2,8 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://d08kaubs7o87n"
-path.s3tc="res://.godot/imported/fence.webp-e011824104c23b7758adec4ffeff6f2d.s3tc.ctex"
+uid="uid://cs2yfw8hpe68i"
+path.s3tc="res://.godot/imported/tex_door.jpg-bec9ac8cf721add974f456ad3c7504c5.s3tc.ctex"
 metadata={
 "imported_formats": ["s3tc_bptc"],
 "vram_texture": true
@@ -11,8 +11,8 @@ metadata={
 
 [deps]
 
-source_file="res://map/fence.webp"
-dest_files=["res://.godot/imported/fence.webp-e011824104c23b7758adec4ffeff6f2d.s3tc.ctex"]
+source_file="res://map/tex_door.jpg"
+dest_files=["res://.godot/imported/tex_door.jpg-bec9ac8cf721add974f456ad3c7504c5.s3tc.ctex"]
 
 [params]
 
